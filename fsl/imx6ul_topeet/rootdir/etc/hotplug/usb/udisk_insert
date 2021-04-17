@@ -1,0 +1,6 @@
+#!/bin/sh
+echo "udisk insert!" > /dev/console
+if [ -e "/dev/$MDEV" ]; then
+        mkdir -p /mnt/udisk/$MDEV
+        mount /dev/$MDEV /mnt/udisk/$MDEV
+fi

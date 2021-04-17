@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "internal sdcard partition unmounted!" > /dev/console
+umount -l /mnt/sdcard
+rm -rf /sdcard

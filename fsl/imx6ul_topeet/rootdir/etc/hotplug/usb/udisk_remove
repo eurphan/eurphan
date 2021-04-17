@@ -1,0 +1,4 @@
+#!/bin/sh
+echo "udisk remove!" > /dev/console
+umount -l /mnt/udisk/sd*
+rm -rf /mnt/udisk/sd*
