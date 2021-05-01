@@ -12,12 +12,14 @@ uboot_path=${src_root}/bootloader/uboot_imx-rel_imx_4.1.15_2.1.0_ga
 kernel_path=${src_root}/kernel/kernel_linux-imx-rel_imx_4.1.15_2.1.0_ga
 rootfs_path=${src_root}/rootfs/rootfs_buildroot-2019.08.1
 device_path=${src_root}/device/fsl/imx6ul_topeet
+external_path=${src_root}/external
 
 echo "source root path:"${src_root}
 echo "uboot source path:"${uboot_path}
 echo "kernel source path:"${kernel_path}
 echo "rootfs source path:"${rootfs_path}
 echo "device path:"${device_path}
+echo "external path:"${external_path}
 
 case $1 in 
 	# 编译部分***********************************************
@@ -71,7 +73,7 @@ case $1 in
 	-fp)
 		echo "**********package build fs**********"
 		cd ${device_path} 
-		./fs_pre_package.sh ${rootfs_path}
+		./fs_pre_package.sh ${rootfs_path} ${external_path}
 		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
@@ -90,7 +92,7 @@ case $1 in
 		cd -
 		echo "packaging buildroot fs..."
 		cd ${device_path} 
-		./fs_pre_package.sh ${rootfs_path}
+		./fs_pre_package.sh ${rootfs_path} ${external_path}
 		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
@@ -118,7 +120,7 @@ case $1 in
 		./build.sh
 		cd -
 		cd ${device_path} 
-		./fs_pre_package.sh ${rootfs_path}
+		./fs_pre_package.sh ${rootfs_path} ${external_path}
 		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
@@ -145,7 +147,7 @@ case $1 in
 		./mkkernel.sh
 		cd -
 		cd ${device_path} 
-		./fs_pre_package.sh ${rootfs_path}
+		./fs_pre_package.sh ${rootfs_path} ${external_path}
 		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
