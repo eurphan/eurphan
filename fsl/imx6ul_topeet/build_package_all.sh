@@ -8,9 +8,9 @@ fi
 
 # 路径
 src_root=$(pwd)
-uboot_path=${src_root}/uboot_imx-rel_imx_4.1.15_2.1.0_ga
-kernel_path=${src_root}/kernel_linux-imx-rel_imx_4.1.15_2.1.0_ga
-rootfs_path=${src_root}/rootfs_buildroot-2019.08.1
+uboot_path=${src_root}/bootloader/uboot_imx-rel_imx_4.1.15_2.1.0_ga
+kernel_path=${src_root}/kernel/kernel_linux-imx-rel_imx_4.1.15_2.1.0_ga
+rootfs_path=${src_root}/rootfs/rootfs_buildroot-2019.08.1
 device_path=${src_root}/device/fsl/imx6ul_topeet
 
 echo "source root path:"${src_root}
