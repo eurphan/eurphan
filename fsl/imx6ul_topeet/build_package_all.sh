@@ -27,76 +27,69 @@ case $1 in
 		echo "**********build uboot**********"
 		cd ${uboot_path}
 		./build.sh
-		cd -
 		;;
 	-k)
 		echo "**********build kernel**********"
 		cd ${kernel_path}
 		./build.sh
-		cd -
 		;;
 	-f)
 		echo "**********build buildroot fs**********"
 		cd ${rootfs_path}
 		./build.sh
-		cd -
 		;;
 	-a)
 		echo "**********build all**********"
 		echo "building uboot..."
 		cd ${uboot_path}
 		./build.sh
-		cd -
 		echo "building kernel..."
 		cd ${kernel_path}
 		./build.sh
-		cd -
 		echo "building buildroot fs..."
 		cd ${rootfs_path}
 		./build.sh
-		cd -
+		echo "building external..."
+		cd ${external_path}
+		cat list | while read line; do
+			cd line
+			./build.sh
+			cd -
+		done
 		;;
 	# 打包部分***********************************************
 	-up)
 		echo "**********package uboot**********"
 		cd ${uboot_path}
 		./cp.sh
-		cd -
 		;;
 	-kp)
 		echo "**********package kernel**********"
 		cd ${kernel_path}
 		./cp.sh
 		./mkkernel.sh
-		cd -
 		;;
 	-fp)
 		echo "**********package build fs**********"
 		cd ${device_path} 
 		./fs_pre_package.sh ${rootfs_path} ${external_path}
-		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
-		cd -
 		;;
 	-ap)
 		echo "**********package all**********"
 		echo "packaging uboot..."
 		cd ${uboot_path}
 		./cp.sh
-		cd -
 		echo "packaging kernel..."
 		cd ${kernel_path}
 		./cp.sh
 		./mkkernel.sh
-		cd -
 		echo "packaging buildroot fs..."
 		cd ${device_path} 
 		./fs_pre_package.sh ${rootfs_path} ${external_path}
-		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
-		cd -
 		;;
 	# 编译并打包部分***********************************************
 	-ubp)
@@ -104,7 +97,6 @@ case $1 in
 		cd ${uboot_path}
 		./build.sh
 		./cp.sh
-		cd -
 		;;
 	-kbp)
 		echo "**********build and package kernel**********"
@@ -112,46 +104,41 @@ case $1 in
 		./build.sh
 		./cp.sh
 		./mkkernel.sh
-		cd -
 		;;
 	-fbp)
 		echo "**********build and package buildroot fs**********"
 		cd ${rootfs_path}
 		./build.sh
-		cd -
 		cd ${device_path} 
 		./fs_pre_package.sh ${rootfs_path} ${external_path}
-		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
-		cd -
 		;;
 	-abp)
 		echo "**********build and package all**********"
 		echo "building..."
 		cd ${uboot_path}
 		./build.sh
-		cd -
 		cd ${kernel_path}
 		./build.sh
-		cd -
 		cd ${rootfs_path}
 		./build.sh
-		cd -
+		cd ${external_path}
+		cat list | while read line; do
+			cd line
+			./build.sh
+			cd -
+		done
 		echo "packaging..."
 		cd ${uboot_path}
 		./cp.sh
-		cd -
 		cd ${kernel_path}
 		./cp.sh
 		./mkkernel.sh
-		cd -
 		cd ${device_path} 
 		./fs_pre_package.sh ${rootfs_path} ${external_path}
-		cd -
 		cd ${rootfs_path}
 		./mkrootfs.sh
-		cd -
 		;;
 	# 帮助菜单
 	*)
