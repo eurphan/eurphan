@@ -125,7 +125,7 @@ case $1 in
 		./build.sh
 		cd ${external_path}
 		cat list | while read line; do
-			cd line
+			cd ${line}
 			./build.sh
 			cd -
 		done
