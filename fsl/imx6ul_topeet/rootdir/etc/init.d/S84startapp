@@ -1,4 +1,19 @@
 #!/bin/sh
 
+export TSLIB_ROOT=/opt/tslib
+export QT_ROOT=/opt/qtlib 
+export TSLIB_TSDEVICE=/dev/input/event1
+export TSLIB_TSEVENTTYPE=input        
+export TSLIB_CONFFILE=/opt/tslib/etc/ts.conf
+export TSLIB_PLUGINDIR=/opt/tslib/lib/ts   
+export TSLIB_CONSOLEDEVICE=none               
+export TSLIB_FBDEVICE=/dev/fb0            
+export QWS_MOUSE_PROTO=tslib:/dev/input/event1
+export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib:$QT_ROOT/lib:$TSLIB_ROOT/lib/
+export QT_QPA_PLATFORM_PLUGIN_PATH=$QT_ROOT/plugins                                             
+export QT_QPA_PLATFORM=linuxfb:tty=/dev/fb0                                                     
+export QT_QPA_FONTDIR=$QT_ROOT/lib/fonts
+export QT_QPA_GENERIC_PLUGINS=t
+
 echo "start app..."
 /opt/app/./app &
