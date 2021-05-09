@@ -1,6 +1,0 @@
-#!/bin/sh
-echo "internal sdcard partiion mounted!" > /dev/console
-if [ -e "/dev/$MDEV" ]; then
-        mkdir -p /sdcard
-        mount -t ext4 /dev/$MDEV /sdcard
-fi

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+dev=$1
+action=$2
+
+echo "mdev hotpluging, dev:"$dev", action:"$action > /dev/kmsg
+if [ $action == "add" ]; then
+	echo "udisk insert!" > /dev/kmsg 
+	if [ -e "/dev/$dev" ]; then
+        	mkdir -p /mnt/udisk/$dev
+        	mount -t vfat /dev/$dev /mnt/udisk/$dev
+	fi
+else
+	echo "udisk remove!" > /dev/kmsg
+	umount -l /mnt/udisk/$dev
+	rm -rf /mnt/udisk/$dev
+fi

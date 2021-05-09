@@ -1,0 +1,18 @@
+#!/bin/sh
+
+dev=$1
+action=$2
+
+echo "mdev hotpluging, dev:"$dev", action:"$action > /dev/kmsg
+
+if [ $action == "add" ]; then
+	echo "internal sdcard partiion mounted!" > /dev/console
+	if [ -e "/dev/$dev" ]; then
+        	mkdir -p /sdcard
+        	mount -t ext4 /dev/$dev /sdcard
+	fi
+else
+	echo "internal sdcard partition unmounted!" > /dev/console
+	umount -l /mnt/sdcard
+	rm -rf /sdcard
+fi
